@@ -2,6 +2,7 @@ import 'package:medal/firebase_options.dart';
 import 'package:medal/pages/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'pages/home/home.dart';
 import 'pages/signup/signup.dart';
 
 Future<void> main() async {
@@ -20,8 +21,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Medal App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
-      home: Login()
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Login(), // Set Login as the initial route
+        '/home': (context) => Home(), // Update with your actual home screen widget
+        // Add other routes here
+      },
     );
   }
 }
