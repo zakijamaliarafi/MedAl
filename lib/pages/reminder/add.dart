@@ -122,7 +122,7 @@ class _AddReminderState extends State<AddReminder> {
                 controller: _keteranganController,
                 maxLines: 3,
               ),
-              Spacer(),
+              // Spacer(),
               ElevatedButton(
                 onPressed: _submitForm,
                 child: Text('Tambah'),
@@ -156,8 +156,7 @@ class _AddReminderState extends State<AddReminder> {
     }
 
     // Create new controllers with default times
-    _timeControllers = defaultTimes
-        .map((time) => TextEditingController(text: time))
-        .toList();
+    _timeControllers =
+        defaultTimes.map((time) => TextEditingController(text: time)).toList();
   }
 }

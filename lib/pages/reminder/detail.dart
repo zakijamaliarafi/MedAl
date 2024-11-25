@@ -50,12 +50,13 @@ class DetailReminder extends StatelessWidget {
             Text('Waktu Konsumsi: ${reminder['waktuKonsumsi']}'),
             SizedBox(height: 8),
             Text('Times: ${reminder['times'].join(' / ')}'),
-            if (reminder['keterangan'] != null && reminder['keterangan'].isNotEmpty)
+            if (reminder['keterangan'] != null &&
+                reminder['keterangan'].isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text('Keterangan: ${reminder['keterangan']}'),
               ),
-            Spacer(),
+            // Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -64,7 +65,8 @@ class DetailReminder extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => UpdateReminder(reminder: reminder),
+                        builder: (context) =>
+                            UpdateReminder(reminder: reminder),
                       ),
                     );
                   },

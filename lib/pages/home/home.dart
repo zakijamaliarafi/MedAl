@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medal/pages/calculator/calculator_list.dart';
+import 'package:medal/pages/components/custom_drawer.dart';
 import 'package:medal/pages/reminder/add.dart';
 import 'package:medal/pages/reminder/detail.dart';
 import 'package:medal/services/auth_service.dart';
@@ -16,56 +18,16 @@ class Home extends StatelessWidget {
         title: Text('Pengingat Obat', style: GoogleFonts.raleway()),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddReminder()),
-              );
-            }
-          ),
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddReminder()),
+                );
+              }),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(''),
-              accountEmail: Text(FirebaseAuth.instance.currentUser?.email ?? ''),
-              currentAccountPicture: CircleAvatar(
-                child: Text(
-                  FirebaseAuth.instance.currentUser?.email?.substring(0, 1) ?? '',
-                  style: TextStyle(fontSize: 40.0),
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.medical_services),
-              title: Text('Pengingat Obat'),
-              onTap: () {
-                // Navigate to Pengingat Obat
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Jadwal Kunjungan'),
-              onTap: () {
-                // Navigate to Jadwal Kunjungan
-              },
-            ),
-            Spacer(),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
-              onTap: () async {
-                // Logout action
-                await AuthService().signout(context: context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: ReminderService().getUserRemindersStream(),
         builder: (context, snapshot) {
@@ -86,7 +48,8 @@ class Home extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailReminder(reminder: reminder),
+                          builder: (context) =>
+                              DetailReminder(reminder: reminder),
                         ),
                       );
                     },
